@@ -1,0 +1,33 @@
+<html>
+  <body>
+    <div id="el">
+      <h1>this is</h1>
+      <p className="paragraph">
+        a <button>button</button> from
+        <a href="https://bfe.dev"><b>BFE</b>.dev</a>
+      </p>
+    </div>
+    <script>
+      let el = document.getElementById("el");
+
+      function virtualize(el) {
+        console.log(el);
+        if (el.type === "") return;
+        let obj = {
+          type: el.tagName ? el.tagName.toLowerCase() : "",
+          props: {
+            children: Array.from(el.childNodes)
+              .map((child) => {
+                // if (child.nodeName === "#text") return;
+                return virtualize(child);
+              })
+              .filter((node) => node !== undefined),
+          },
+        };
+
+        return obj;
+      }
+      console.log(virtualize(el));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+Solution
+The solution is much shorter using React as compared to the Vanilla version.
+
+We can create a Star component that takes in a filled prop which conditionally renders the appropriate classnames.
+
+The component will need a state hoveredIndex which is used to track the index of the currently hovered star.
+
+To determine whether a Star should be highlighted/filled, we check if any stars are currently hovered, if so, that takes priority and any star with index <= hoveredIndex should be highlighted. Otherwise, any star where index < value can be highlighted/filled.
+
+Notes
+The Star Rating widget can be improved in the following ways:
+
+Allow the value to be part of a form submit event data by embedding an <input>.
+Add keyboard support for better a11y.
+Add RTL (right-to-left) support.
+Test Cases
+Click on each star and move the cursor away, see that the highlighted state is correct.
+Hover over each star, see that every star under the cursor and to its left are highlighted.
+Remove cursor over widget, see that the highlighted state is back to before the hovering.
+Render multiple components, ensure that each can maintain its own state and interacting with a widget does not affect other onscreen components.

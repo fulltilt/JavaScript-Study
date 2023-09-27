@@ -1,0 +1,41 @@
+Solution
+The following explanation assumes you have a good understanding of Transfer List's React solution.
+
+State
+The state structure remains the same and the choice of Map is flexible enough to handle the new use case of adding items to the list.
+
+Rendering
+The main additions in this question are:
+
+Input form
+We'll wrap the <input> in a <form> for built-in keyboard handling, a11y, and UX.
+
+Bulk Selection Checkbox
+Did you know that an HTML checkbox actually has 3 states? They are checked, unchecked, and indeterminate. Indeterminate state is not commonly used and cannot be set via HTML attributes. Hence we need to obtain a reference to the checkbox instance and do checkboxInputElement.indeterminate = true. This can be done in React via the useRef hook.
+
+We can write a new function called determineListState that accepts the items and determine the selection state of the list, whether no items are selected, some items are selected, or all items are selected. With this selection. With this state, we can render the appropriate appearance for the bulk selection checkbox. This state is also useful for determining what happens when the bulk selection checkbox is clicked/triggered. We can create a new function called setAllItemsSelectionState to return a new set of list items which are set to a specific selection state.
+
+Test Cases
+Adding items
+New items can be added to their respective lists.
+New items are added to the bottom of the lists.
+Selecting items
+Items can be checked/unchecked.
+"Bulk selection" checkbox
+Shows empty/indeterminate/checked when there are no/some/all items checked respectively.
+Clicking on it unselects / selects all the items depending on the selection state of the items.
+Checkbox is disabled when there are no items in the list.
+Selection counts and total counts are reflected correctly.
+"Transfer selected items" buttons
+Button is disabled when no items are selected in the source list.
+Upon clicking, selected items are transferred from the source list to the bottom of the destination list.
+A11y
+Use of <form> submit for adding new items to the list.
+<input type="checkbox"> are paired with <label>s. Clicking on labels also selects/deselect the item.
+Since the <button>s do not have a visible label, use aria-labels to indicate their purpose. As a result, make the button contents hidden from screen readers via aria-hidden="true".
+All required functionality should be achievable just by using the keyboard.
+User Experience
+To ensure a good user experience, we can implement the following:
+
+Disallow non-empty items to be added to the list.
+Input stays focused after an item has been added.

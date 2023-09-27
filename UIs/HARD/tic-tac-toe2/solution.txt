@@ -1,0 +1,54 @@
+Solution
+The following explanation assumes you have a good understanding of Tic-tac-toe's React solution.
+
+The standard tic-tac-toe game uses N = 3 and M = 3. In general it is a good practice to parameterize the app/components you're building, however the general version of tic-tac-toe takes significantly longer to implement. If you are sure you don't need to build a general version, then it's recommended to stick with the basic Tic-tac-toe implementation.
+
+Rendering
+Since the dimensions of the board is not fixed and can only be determined at runtime, we have to use inline styles to generate the required grid-template-columns property value.
+
+State
+Other than the two core pieces of state as per 3 x 3 Tic-tac-toe, we now include a new winner state to track the state of the winning mark of the board. Strictly speaking, the winner is derived state and can be determined by processing the board, which is the approach taken by the 3 x 3 version. However, for N x N boards where N and M can be very large, we determine the winner only after every turn and store it in state, which is a more efficient approach as compared to determining on every render.
+
+determineWinner
+In the 3 x 3 version, we call this function for every render. But for an N x N board, we'll call this function after every turn as a winner can only emerge after a turn.
+
+The determineWinner function takes four parameters: board (the current state of the game board), i (the index of the last marked cell), n (the size of the board), and m (the number of consecutive marks required to win).
+
+It firstly generates four arrays representing the winning lines:
+
+rowLine: Contains the indices of all the cells in the same row as the last marked cell.
+colLine: Contains the indices of all the cells in the same column as the last marked cell.
+leftToRightDiagonalLine: Contains the indices of all the cells in the left-to-right diagonal that includes the last marked cell.
+rightToLeftDiagonalLine: Contains the indices of all the cells in the right-to-left diagonal that includes the last marked cell.
+For each line in lines, it then counts if there are m consecutive cells with the same mark and returns the mark if there is, otherwise it returns null, indicating there's no winner for the board yet.
+
+Test Cases
+Initial Board State
+Verify that the game board is displayed correctly with N x N empty cells.
+Verify that the status message indicates it's player X's turn.
+Marking Cells
+Click on an empty cell.
+Verify that the cell is marked with an "X" and the turn switches to player O.
+Click on another empty cell.
+Verify that the second cell is marked with an "O" and the turn switches back to player X.
+Repeat this process for a few more cells to ensure the marks are placed correctly and the turn alternates between players.
+Winning Conditions
+Create a winning line for player X or player O by marking M cells in a row, column, or diagonal.
+Verify that the status message displays the winning player's message correctly.
+Verify that no further marks can be made after the game is won.
+Click on the "Reset" button.
+Verify that the board is cleared and the game restarts with player X's turn.
+Draw Condition
+Fill all the cells on the board without creating a winning line.
+Verify that the status message displays a draw message correctly.
+Verify that no further marks can be made after the draw.
+Click on the "Reset" button.
+Verify that the board is cleared, and the game restarts with player X's turn.
+Accessibility
+Use a screen reader to navigate and interact with the game.
+Verify that the status message, cell markings, and buttons are announced correctly by the screen reader.
+Verify that the game can be played and reset using only keyboard navigation.
+Responsive Design
+Test the game on different screen sizes, such as desktop, tablet, and mobile devices.
+Verify that the game board and cells adjust correctly to different screen sizes.
+Ensure that the game remains playable and visually appealing on smaller screens.
