@@ -940,6 +940,72 @@ function PQ2(compareFn) {
 }
 
 // const mappedArrays = arrays.map((array) => array.map(iteratee));
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
 
-let x = [1, , 3];
-for (let y in x) console.log(x[y]);
+const dom = new JSDOM(
+  `<!DOCTYPE html><body><button id="main" class="foo bar baz">Click me</button></body>`
+);
+
+function $(selector) {
+  const element = dom.window.document.querySelector(selector);
+
+  return {
+    /**
+     * @param {string} className
+     * @param {boolean} [state]
+     * @return {Object|void}
+     */
+    toggleClass: function (className, state) {
+      let classes = element.className.split(" ");
+      let newClasses = className.split(" ").filter(Boolean);
+      for (let c of newClasses) {
+        if (classes.includes(c) && state !== true)
+          classes.splice(classes.indexOf(c), 1);
+        else if (state !== false) classes.push(c);
+      }
+      element.className = classes.join(" ");
+      return this;
+    },
+    /**
+     * @param {string} className
+     * @return {Object}
+     */
+    addClass: function (className) {
+      let classes = Array.from(element.classList);
+      let newClasses = className.split(" ").filter(Boolean);
+      for (let c of newClasses) {
+        if (!classes.includes(c)) classes.push(c);
+      }
+
+      element.className = classes.join(" ");
+      return this;
+    },
+    /**
+     * @param {string} className
+     * @return {Object}
+     */
+    removeClass: function (className) {
+      let classes = Array.from(element.classList);
+      let classesToRemove = className.split(" ").filter(Boolean);
+      for (let c of classesToRemove) {
+        let idx = classes.indexOf(c);
+        if (idx !== -1) classes.splice(idx, 1);
+      }
+      element.className = classes.join(" ");
+      return this;
+    },
+  };
+}
+
+// $("button")
+//   .toggleClass(" qux  ")
+//   .toggleClass(" baz  ")
+//   .addClass("corge")
+//   .removeClass("foo");
+$("button").toggleClass(" qux  ");
+console.log(dom.window.document.querySelector("button").className);
+
+{
+  /* <button class="foo bar baz">Click me</button>; */
+}
