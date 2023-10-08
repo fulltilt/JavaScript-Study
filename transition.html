@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <style>
+      .btn {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: none;
+        background: slateblue;
+        color: white;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 1;
+
+        transition: transform 250ms;
+      }
+
+      .btn:hover {
+        transform: translateY(-10px);
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn">Hello World</button>
+  </body>
+</html>
+
+<!--
+https://www.joshwcomeau.com/animation/css-transitions/
+
+-transition can take a number of values, but only two are required:
+  1.The name of the property we wish to animate
+  2.The duration of the animation    
+
+-If you plan on animating multiple properties, you can pass it a comma-separated list:
+
+CSS
+.btn {
+  transition: transform 250ms, opacity 400ms;
+}
+.btn:hover {
+  transform: scale(1.2);
+  opacity: 0;
+}
+-you can specify the timing function through transition-timing-function
+
+.btn {
+  transition: transform 250ms;
+  transition-timing-function: linear;
+}
+Or, we can pass it directly to the transition shorthand property:
+
+CSS
+.btn {
+  transition: transform 250ms linear;
+}
+-'ease' is the default timing function
+-you can create your own timing fxn via the cubic-bezier(...) fxn
+
+-'will-change' is a property that allows us to hint to the browser that we're going to animate the selected element, and that it should optimize for this case.
+.btn {
+  will-change: transform;
+}
+
+-you can inline the transition-delay attribute but it's recommended to do it separately else you have 2 time variables and it doesn't
+specify which is which
+-->

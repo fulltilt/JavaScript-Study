@@ -9,12 +9,16 @@ function $(selector) {
      * @return {Object|void}
      */
     toggleClass: function (className, state) {
+      if (state !== undefined) {
+        if (state) this.addClass(className);
+        else this.removeClass(className);
+        return;
+      }
       let classes = element.className.split(" ");
-      let newClasses = className.split(" ");
+      let newClasses = className.split(" ").filter(Boolean);
       for (let c of newClasses) {
-        if (classes.includes(c) && state !== true)
-          classes.splice(classes.indexOf(c), 1);
-        else if (state !== false) classes.push(c);
+        if (classes.includes(c)) classes.splice(classes.indexOf(c), 1);
+        else classes.push(c);
       }
       element.className = classes.join(" ");
       return this;
@@ -31,7 +35,6 @@ function $(selector) {
       }
 
       element.className = classes.join(" ");
-      console.log(element);
       return this;
     },
     /**
@@ -39,15 +42,13 @@ function $(selector) {
      * @return {Object}
      */
     removeClass: function (className) {
-      // let classes = element.className.split(' ')
-      // if (classes.includes(className)) classes.splice(classes.indexOf(className), 1)
-      // element.className = classes.join(' ')
       let classes = Array.from(element.classList);
       let classesToRemove = className.split(" ").filter(Boolean);
       for (let c of classesToRemove) {
-        let idx = classes.indexOf(c);
-        if (idx !== 0) classes.splice(idx, 1);
+        if (classes.includes(c)) classes.splice(classes.indexOf(c), 1);
       }
+
+      element.className = classes.join(" ");
       return this;
     },
   };
