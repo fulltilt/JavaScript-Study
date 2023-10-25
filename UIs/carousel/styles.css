@@ -1,0 +1,43 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel-img {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  transition: all 1s;
+}
+
+.carousel-button {
+  position: absolute;
+  background-color: white;
+  top: 50%;
+}
+
+.prev {
+  left: 1rem;
+}
+
+.next {
+  right: 1rem;
+}
+
+.gallery {
+  padding: 1rem;
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 auto;
+}
+
+.gallery > img {
+  height: 3rem;
+}
