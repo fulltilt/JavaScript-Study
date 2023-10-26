@@ -1,4 +1,4 @@
-const objectMap = require("./map");
+const objectMap = require("./objectMap");
 
 const double = (x) => x * 2;
 
