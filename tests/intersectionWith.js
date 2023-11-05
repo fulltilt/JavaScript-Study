@@ -37,3 +37,34 @@ If any of the arrays are empty, the function will return an empty array.
 Resources
 Lodash _.intersectionWith
 */
+
+/*
+Solution
+
+JavaScript
+
+TypeScript
+/**
+ * @param {Function} comparator - The comparator function used to determine equality between elements.
+ * @param {...Array} arrays - The arrays to perform the intersection on.
+ * @returns {Array} - A new array containing the elements that are present in all given arrays.
+ *
+export default function intersectionWith(comparator, ...arrays) {
+  if (!arrays.length) {
+    return [];
+  }
+
+  const firstArray = arrays[0];
+
+  // Perform intersection
+  return firstArray.filter((value) =>
+    arrays
+      .slice(1)
+      .every((arr) => arr.some((otherValue) => comparator(value, otherValue))),
+  );
+}
+The solution first maps each array using the iteratee function to transform the values. Then, it filters the values from the first mapped array that are present in all the other mapped arrays. Finally, it maps the intersected values back to the original values from the first array.
+
+Resources
+Lodash _.intersectionWith
+*/
